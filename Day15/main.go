@@ -46,8 +46,8 @@ func partTwo(cave [][]*input.Node) int {
 	lenX := len(cave[0])
 	lenY := len(cave)
 
-	for _, row := range cave {
-		for y := 1; y <= 4; y++ {
+	for y := 1; y <= 4; y++ {
+		for _, row := range cave[0:lenY] {
 			newRow := make([]*input.Node, 0)
 			for _, cell := range row {
 				risk := cell.Risk + y
@@ -72,13 +72,6 @@ func partTwo(cave [][]*input.Node) int {
 				cave[y] = append(cave[y], &input.Node{Risk: risk, X: cell.X + offsetX, Y: cell.Y})
 			}
 		}
-	}
-
-	for _, row := range cave {
-		for _, cell := range row {
-			fmt.Print(cell.Risk)
-		}
-		fmt.Println()
 	}
 
 	return partOne(cave)
